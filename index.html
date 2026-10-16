@@ -8,27 +8,85 @@
 </head>
 <body>
   <main class="game">
-    <h1>Guess the number</h1>
-    <p class="intro">I'm thinking of a number between 1 and 100.</p>
 
-    <div class="range" aria-live="polite">
-      <span id="low">1</span>
-      <div class="track"><div id="window" class="window"></div></div>
-      <span id="high">100</span>
-    </div>
+    <!-- Screen 1: setup and hint meanings -->
+    <section id="setup">
+      <h1>Guess the number</h1>
+      <p class="intro">
+        Two players take turns. Each player gets their own secret number
+        between 1 and 100. The player who needs fewer guesses wins.
+      </p>
 
-    <div class="entry">
-      <input id="guess" type="number" min="1" max="100" inputmode="numeric"
-             placeholder="Your guess" aria-label="Your guess" autofocus>
-      <button id="submit" type="button">Guess</button>
-    </div>
+      <div class="names">
+        <label>Player 1
+          <input id="name1" type="text" maxlength="15" placeholder="Player 1">
+        </label>
+        <label>Player 2
+          <input id="name2" type="text" maxlength="15" placeholder="Player 2">
+        </label>
+      </div>
 
-    <p id="message" class="message" aria-live="polite"></p>
-    <ul id="hints" class="hints"></ul>
+      <h2>What the hints mean</h2>
+      <ul class="legend">
+        <li><span class="temp-burning">Burning hot</span> Your guess is within 5 of the number.</li>
+        <li><span class="temp-hot">Hot</span> Your guess is within 10 of the number.</li>
+        <li><span class="temp-warm">Warm</span> Your guess is within 20 of the number.</li>
+        <li><span class="temp-cold">Cold</span> Your guess is more than 20 away.</li>
+        <li><span class="temp-extra">Extra hints</span> After 3 guesses you learn if the number is even or odd. After 5 guesses you learn if it is divisible by 5.</li>
+      </ul>
 
-    <p class="count">Guesses: <strong id="count">0</strong></p>
+      <button id="start" type="button" class="wide">Start game</button>
+    </section>
 
-    <button id="restart" type="button" class="restart" hidden>Play again</button>
+    <!-- Screen 2: a player's turn -->
+    <section id="play" hidden>
+      <h1 id="turnTitle">Player 1's turn</h1>
+      <p class="intro">I'm thinking of a number between 1 and 100.</p>
+
+      <div class="range" aria-live="polite">
+        <span id="low">1</span>
+        <div class="track"><div id="window" class="window"></div></div>
+        <span id="high">100</span>
+      </div>
+
+      <div class="entry">
+        <input id="guess" type="number" min="1" max="100" inputmode="numeric"
+               placeholder="Your guess" aria-label="Your guess">
+        <button id="submit" type="button">Guess</button>
+      </div>
+
+      <p id="message" class="message" aria-live="polite"></p>
+      <ul id="hints" class="hints"></ul>
+
+      <p class="count">Guesses: <strong id="count">0</strong></p>
+
+      <button id="next" type="button" class="wide" hidden>Next</button>
+
+      <details class="legend-box">
+        <summary>What do the hints mean?</summary>
+        <ul class="legend">
+          <li><span class="temp-burning">Burning hot</span> Within 5 of the number.</li>
+          <li><span class="temp-hot">Hot</span> Within 10 of the number.</li>
+          <li><span class="temp-warm">Warm</span> Within 20 of the number.</li>
+          <li><span class="temp-cold">Cold</span> More than 20 away.</li>
+          <li><span class="temp-extra">Extra hints</span> Even or odd after 3 guesses. Divisible by 5 after 5 guesses.</li>
+        </ul>
+      </details>
+    </section>
+
+    <!-- Screen 3: final result -->
+    <section id="result" hidden>
+      <h1>Final result</h1>
+      <table class="scores">
+        <thead>
+          <tr><th>Player</th><th>Guesses</th></tr>
+        </thead>
+        <tbody id="scores"></tbody>
+      </table>
+      <p id="winner" class="message win"></p>
+      <button id="again" type="button" class="wide">Play again</button>
+    </section>
+
   </main>
 
   <script src="script.js"></script>

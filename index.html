@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Guess the Number</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="game">
+    <h1>Guess the number</h1>
+    <p class="intro">I'm thinking of a number between 1 and 100.</p>
+
+    <div class="range" aria-live="polite">
+      <span id="low">1</span>
+      <div class="track"><div id="window" class="window"></div></div>
+      <span id="high">100</span>
+    </div>
+
+    <div class="entry">
+      <input id="guess" type="number" min="1" max="100" inputmode="numeric"
+             placeholder="Your guess" aria-label="Your guess" autofocus>
+      <button id="submit" type="button">Guess</button>
+    </div>
+
+    <p id="message" class="message" aria-live="polite"></p>
+    <ul id="hints" class="hints"></ul>
+
+    <p class="count">Guesses: <strong id="count">0</strong></p>
+
+    <button id="restart" type="button" class="restart" hidden>Play again</button>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
